@@ -48,7 +48,12 @@ class _LogQueue:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--worker-id", type=int, required=True)
+    parser.add_argument("--max-episodes", type=int, default=None)
     args = parser.parse_args()
+
+    if args.max_episodes is not None:
+        import ablate_g_train
+        ablate_g_train.TOTAL_EPS = args.max_episodes
 
     WEIGHTS_DIR.mkdir(parents=True, exist_ok=True)
 
